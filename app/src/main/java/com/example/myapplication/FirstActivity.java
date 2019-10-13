@@ -14,7 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class FirstActivity extends AppCompatActivity {
+public class FirstActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {//能看
@@ -37,6 +37,12 @@ public class FirstActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("FirstActivity", "onRestart");
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         switch (requestCode){
             case 1:
@@ -53,13 +59,14 @@ public class FirstActivity extends AppCompatActivity {
 
 
         super.onCreate(savedInstanceState);
+        Log.d("FirstActivity", "Task id is"+getTaskId());
         setContentView(R.layout.first_layout);
         Button button1=findViewById(R.id.button1);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(FirstActivity.this,SecondActivity.class);
-                startActivityForResult(intent,1);
+                startActivity(intent);
             }
         });
     }
